@@ -1,0 +1,35 @@
+# Deployed on Render:
+
+
+
+
+# Localhost:
+
+### Get all categories
+GET http://localhost:3000/categories
+
+### Get Single category
+GET http://localhost:3000/categories/66fde5fcc07a59e934afa735
+
+### Create category
+POST  http://localhost:3000/categories HTTP/1.1
+Content-Type: application/json
+
+  {
+    "name": "Garden",
+    "description": "Different supplies",
+    "created_at": "2024-09-30T12:34:56Z"
+  }
+
+### Update  category
+PUT  http://localhost:3000/categories/66ef3e880201e3b5dd1459e9 HTTP/1.1
+Content-Type: application/json
+
+ {
+    "name": "Garden",
+    "description": "Different supplies",
+    "created_at": "2024-09-30T12:34:56Z"
+  }
+
+### Delete Single category
+DELETE  http://localhost:3000/categories/66f6152ff38560018e2af59e

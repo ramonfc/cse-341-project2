@@ -1,0 +1,445 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Contacts Project API",
+    "description": "API Documentation",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/categories/": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "All categories",
+        "description": "Gets all categories",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Creates a category",
+        "description": "Creates a new category given the required data.  Requires the following fields: name, description, and created_at.   Returns an object containing the id created.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "required": [
+                "name",
+                "description",
+                "created_at"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Garden"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Different supplies"
+                },
+                "created_at": {
+                  "type": "string",
+                  "example": "2024-09-30T12:34:56Z"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/categories/{id}": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Gets a category",
+        "description": "Gets a single category given the id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the category to retrieve",
+            "example": "6500002e6f1a2b6d9c5e790a"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Updates a category",
+        "description": "Updates the category info given the id. <br>  Only the given fields will be updated: <br>  name, description, created_at.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Garden"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Different supplies"
+                },
+                "created_at": {
+                  "type": "string",
+                  "example": "2024-09-30T12:34:56Z"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Deletes a category",
+        "description": "Deletes the category info given the id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the category to delete",
+            "example": "6500002e6f1a2b6d9c5e790a"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "All products",
+        "description": "Gets all products",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Creates a product",
+        "description": "Creates a new product given the required data. <br>  Requires the following fields: name, price, description, category_id, stock, discount.  The field created_at is optional. <br>  Returns an object containing the id created.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "required": [
+                "name",
+                "price",
+                "description",
+                "category_id",
+                "stock",
+                "discount"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Product name"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Product description"
+                },
+                "category_id": {
+                  "type": "string",
+                  "description": "The ObjectId of the associated category",
+                  "example": "6500002e6f1a2b6d9c5e790a"
+                },
+                "price": {
+                  "type": "number",
+                  "example": 19.99
+                },
+                "stock": {
+                  "type": "integer",
+                  "example": 50
+                },
+                "discount": {
+                  "type": "number",
+                  "example": 10
+                },
+                "created_at": {
+                  "type": "string",
+                  "example": "2024-09-30T12:34:56Z"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Gets a product",
+        "description": "Gets a single product given the id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the product to retrieve",
+            "example": "6500002e6f1a2b6d9c5e790a"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Updates a product",
+        "description": "Updates the product info given the id. <br>  Only the given fields will be updated: <br>  name, price, description, category_id, stock, discount, created_at.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Product name"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Product description"
+                },
+                "category_id": {
+                  "type": "string",
+                  "description": "The ObjectId of the associated category",
+                  "example": "6500002e6f1a2b6d9c5e790a"
+                },
+                "price": {
+                  "type": "number",
+                  "example": 19.99
+                },
+                "stock": {
+                  "type": "integer",
+                  "example": 50
+                },
+                "discount": {
+                  "type": "number",
+                  "example": 10
+                },
+                "created_at": {
+                  "type": "string",
+                  "example": "2024-09-30T12:34:56Z"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Deletes a product",
+        "description": "Deletes the product info given the id. <br>  If there are products associated with this category, deletion is not allowed. <br>  Reassign the products to a different category before deletion.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the product to delete",
+            "example": "6500002e6f1a2b6d9c5e790a"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/category/{category_id}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Gets products by category id",
+        "description": "Fetches all products that belong to a given category id.",
+        "parameters": [
+          {
+            "name": "category_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ObjectId of the category",
+            "example": "6500002e6f1a2b6d9c5e790a"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
