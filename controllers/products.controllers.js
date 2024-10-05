@@ -251,9 +251,7 @@ const deleteProduct = async (req, res) => {
     // #swagger.tags=['Products']
     // #swagger.summary="Deletes a product"
     /**
-     * #swagger.description= "Deletes the product info given the id. <br>
-      If there are products associated with this category, deletion is not allowed. <br>
-      Reassign the products to a different category before deletion."
+     * #swagger.description= "Deletes the product info given the id."
     */
     /**
         * #swagger.parameters['id'] = {

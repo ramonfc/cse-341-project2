@@ -182,7 +182,9 @@ const deleteCategory = async (req, res) => {
     // #swagger.tags=['Categories']
     // #swagger.summary="Deletes a category"
     /**
-     * #swagger.description= "Deletes the category info given the id"
+     * #swagger.description= "Deletes the category info given the id. <br>
+      If there are products associated with this category, deletion is not allowed. <br>
+      Reassign the products to a different category before deletion."
     */
     /**
         * #swagger.parameters['id'] = {
