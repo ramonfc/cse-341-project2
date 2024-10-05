@@ -4,10 +4,10 @@ const doc = {
     title: 'Contacts Project API',
     description: 'API Documentation'
   },
-  host: `localhost:3000`,
-  schemes: ['http', 'https']
-  // host: "cse-341-contacts-eeak.onrender.com",
-  // schemes: ['https']
+  // host: `localhost:3000`,
+  // schemes: ['http', 'https']
+  host: "cse-341-project2-z2xo.onrender.com",
+  schemes: ['https']
 };
 
 const outputFile = './swagger.json';
