@@ -34,7 +34,7 @@ const saveCategory = validateRule({
 const updateCategory = validateRule({
     name: 'string', 
     description: 'string', 
-    created_at: 'required|string|regex:/(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z)/' 
+    created_at: 'string|regex:/(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z)/' 
   });
 
 
@@ -55,7 +55,7 @@ const updateProduct = validateRule({
     price: 'numeric',
     stock: 'integer',
     category_id: 'string|regex:/^[0-9a-fA-F]{24}$/', 
-    created_at: 'required|string|regex:/(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z)/' 
+    created_at: 'string|regex:/(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z)/' 
 });
 
 module.exports = {
