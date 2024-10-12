@@ -78,9 +78,8 @@ const createCategory = async (req, res) => {
         Returns an object containing the id created."
     */
 
-    /* #swagger.parameters['body'] = {
-       in: 'body', 
-       '@schema': { 
+    /* #swagger.requestBody = {      
+       schema: { 
             "required": ["name", "description", "created_at"], 
            "properties": { 
                "name": { 
@@ -99,6 +98,12 @@ const createCategory = async (req, res) => {
        } 
    } 
    */ 
+
+     /* #swagger.security = [{
+        "oAuthSecurity": [
+            "write"
+        ]
+    }] */
     const { name, description, created_at } = req.body;
     const category = { name, description, created_at };
 
@@ -127,9 +132,8 @@ const updateCategory = async (req, res) => {
     */
 
     /**
-    * #swagger.parameters['body'] = { 
-         in: 'body', 
-         '@schema': { 
+    * #swagger.requestBody = { 
+         schema: { 
              "properties": { 
                "name": { 
                    "type": "string", 
@@ -147,6 +151,13 @@ const updateCategory = async (req, res) => {
          } 
      } 
      */ 
+
+
+     /* #swagger.security = [{
+        "oAuthSecurity": [
+            "write"
+        ]
+    }] */
 
     // id validation
     let categoryId = req.params.id;
@@ -195,7 +206,12 @@ const deleteCategory = async (req, res) => {
            example: '6500002e6f1a2b6d9c5e790a'
          }
         */
-
+       
+     /* #swagger.security = [{
+        "oAuthSecurity": [
+            "write"
+        ]
+    }] */
 
     // id validation
     let categoryId = req.params.id;

@@ -1,14 +1,14 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.1",
   "info": {
     "title": "Project 2: Categories and Products",
-    "description": "API Documentation",
+    "description": "    \n  This API provides various endpoints for accessing resources. \n  Please note the following important information regarding authentication:\n\n  - **Authentication Required**: Endpoints marked with a padlock icon are restricted and can only be accessed after logging in via GitHub using OAuth.\n  - **OAuth Login:** The authentication is handled via GitHub OAuth. To connect, use the following endpoints:\n    - **Login**: [cse-341-project2-z2xo.onrender.com/login](https://cse-341-project2-z2xo.onrender.com/login) - Initiates the OAuth process with GitHub. Once authenticated, you will gain access to all protected endpoints.\n    - **Logout**: [cse-341-project2-z2xo.onrender.com/logout](https://cse-341-project2-z2xo.onrender.com/logout) - Ends your session and disconnects from GitHub.\n\n    Make sure to log in using the specified route to utilize all available endpoints.\n    ",
     "version": "1.0.0"
   },
-  "host": "cse-341-project2-z2xo.onrender.com",
-  "basePath": "/",
-  "schemes": [
-    "https"
+  "servers": [
+    {
+      "url": "https://cse-341-project2-z2xo.onrender.com/"
+    }
   ],
   "paths": {
     "/categories/": {
@@ -18,9 +18,6 @@
         ],
         "summary": "All categories",
         "description": "Gets all categories",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -39,39 +36,72 @@
         ],
         "summary": "Creates a category",
         "description": "Creates a new category given the required data.  Requires the following fields: name, description, and created_at.   Returns an object containing the id created.",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "required": [
-                "name",
-                "description",
-                "created_at"
-              ],
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "Garden"
-                },
-                "description": {
-                  "type": "string",
-                  "example": "Different supplies"
-                },
-                "created_at": {
-                  "type": "string",
-                  "example": "2024-09-30T12:34:56Z"
-                }
-              }
-            }
-          }
-        ],
         "responses": {
           "201": {
             "description": "Created"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "oAuthSecurity": [
+              "write"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "name",
+                  "description",
+                  "created_at"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Garden"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Different supplies"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "example": "2024-09-30T12:34:56Z"
+                  }
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "required": [
+                  "name",
+                  "description",
+                  "created_at"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Garden"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Different supplies"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "example": "2024-09-30T12:34:56Z"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -83,15 +113,14 @@
         ],
         "summary": "Gets a category",
         "description": "Gets a single category given the id",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
+            "schema": {
+              "type": "string"
+            },
             "description": "ID of the category to retrieve",
             "example": "6500002e6f1a2b6d9c5e790a"
           }
@@ -122,26 +151,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "Garden"
-                },
-                "description": {
-                  "type": "string",
-                  "example": "Different supplies"
-                },
-                "created_at": {
-                  "type": "string",
-                  "example": "2024-09-30T12:34:56Z"
-                }
-              }
+              "type": "string"
             }
           }
         ],
@@ -152,11 +163,61 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "oAuthSecurity": [
+              "write"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Garden"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Different supplies"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "example": "2024-09-30T12:34:56Z"
+                  }
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Garden"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Different supplies"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "example": "2024-09-30T12:34:56Z"
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -171,7 +232,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
+            "schema": {
+              "type": "string"
+            },
             "description": "ID of the category to delete",
             "example": "6500002e6f1a2b6d9c5e790a"
           }
@@ -183,10 +246,20 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "oAuthSecurity": [
+              "write"
+            ]
+          }
+        ]
       }
     },
     "/products/": {
@@ -196,9 +269,6 @@
         ],
         "summary": "All products",
         "description": "Gets all products",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -217,53 +287,6 @@
         ],
         "summary": "Creates a product",
         "description": "Creates a new product given the required data. <br>  Requires the following fields: name, price, description, category_id, stock, discount.  The field created_at is optional. <br>  Returns an object containing the id created.",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "required": [
-                "name",
-                "price",
-                "description",
-                "category_id",
-                "stock",
-                "discount"
-              ],
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "Product name"
-                },
-                "description": {
-                  "type": "string",
-                  "example": "Product description"
-                },
-                "category_id": {
-                  "type": "string",
-                  "description": "The ObjectId of the associated category",
-                  "example": "6500002e6f1a2b6d9c5e790a"
-                },
-                "price": {
-                  "type": "number",
-                  "example": 19.99
-                },
-                "stock": {
-                  "type": "integer",
-                  "example": 50
-                },
-                "discount": {
-                  "type": "number",
-                  "example": 10
-                },
-                "created_at": {
-                  "type": "string",
-                  "example": "2024-09-30T12:34:56Z"
-                }
-              }
-            }
-          }
-        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -271,8 +294,108 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "oAuthSecurity": [
+              "write"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "name",
+                  "price",
+                  "description",
+                  "category_id",
+                  "stock",
+                  "discount"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Product name"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Product description"
+                  },
+                  "category_id": {
+                    "type": "string",
+                    "description": "The ObjectId of the associated category",
+                    "example": "6500002e6f1a2b6d9c5e790a"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 19.99
+                  },
+                  "stock": {
+                    "type": "integer",
+                    "example": 50
+                  },
+                  "discount": {
+                    "type": "number",
+                    "example": 10
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "example": "2024-09-30T12:34:56Z"
+                  }
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "required": [
+                  "name",
+                  "price",
+                  "description",
+                  "category_id",
+                  "stock",
+                  "discount"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Product name"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Product description"
+                  },
+                  "category_id": {
+                    "type": "string",
+                    "description": "The ObjectId of the associated category",
+                    "example": "6500002e6f1a2b6d9c5e790a"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 19.99
+                  },
+                  "stock": {
+                    "type": "integer",
+                    "example": 50
+                  },
+                  "discount": {
+                    "type": "number",
+                    "example": 10
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "example": "2024-09-30T12:34:56Z"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -284,15 +407,14 @@
         ],
         "summary": "Gets a product",
         "description": "Gets a single product given the id",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
+            "schema": {
+              "type": "string"
+            },
             "description": "ID of the product to retrieve",
             "example": "6500002e6f1a2b6d9c5e790a"
           }
@@ -323,43 +445,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "Product name"
-                },
-                "description": {
-                  "type": "string",
-                  "example": "Product description"
-                },
-                "category_id": {
-                  "type": "string",
-                  "description": "The ObjectId of the associated category",
-                  "example": "6500002e6f1a2b6d9c5e790a"
-                },
-                "price": {
-                  "type": "number",
-                  "example": 19.99
-                },
-                "stock": {
-                  "type": "integer",
-                  "example": 50
-                },
-                "discount": {
-                  "type": "number",
-                  "example": 10
-                },
-                "created_at": {
-                  "type": "string",
-                  "example": "2024-09-30T12:34:56Z"
-                }
-              }
+              "type": "string"
             }
           }
         ],
@@ -370,11 +457,95 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "oAuthSecurity": [
+              "write"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Product name"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Product description"
+                  },
+                  "category_id": {
+                    "type": "string",
+                    "description": "The ObjectId of the associated category",
+                    "example": "6500002e6f1a2b6d9c5e790a"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 19.99
+                  },
+                  "stock": {
+                    "type": "integer",
+                    "example": 50
+                  },
+                  "discount": {
+                    "type": "number",
+                    "example": 10
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "example": "2024-09-30T12:34:56Z"
+                  }
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Product name"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Product description"
+                  },
+                  "category_id": {
+                    "type": "string",
+                    "description": "The ObjectId of the associated category",
+                    "example": "6500002e6f1a2b6d9c5e790a"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 19.99
+                  },
+                  "stock": {
+                    "type": "integer",
+                    "example": 50
+                  },
+                  "discount": {
+                    "type": "number",
+                    "example": 10
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "example": "2024-09-30T12:34:56Z"
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -389,7 +560,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
+            "schema": {
+              "type": "string"
+            },
             "description": "ID of the product to delete",
             "example": "6500002e6f1a2b6d9c5e790a"
           }
@@ -401,10 +574,20 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "oAuthSecurity": [
+              "write"
+            ]
+          }
+        ]
       }
     },
     "/products/category/{category_id}": {
@@ -419,7 +602,9 @@
             "name": "category_id",
             "in": "path",
             "required": true,
-            "type": "string",
+            "schema": {
+              "type": "string"
+            },
             "description": "The ObjectId of the category",
             "example": "6500002e6f1a2b6d9c5e790a"
           }
@@ -436,6 +621,23 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "oAuthSecurity": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://github.com/login/oauth/authorize",
+            "tokenUrl": "https://github.com/login/oauth/access_token",
+            "scopes": {
+              "read": "read your data",
+              "write": "modify data in your account"
+            }
           }
         }
       }

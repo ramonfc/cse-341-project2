@@ -80,9 +80,8 @@ const createProduct = async (req, res) => {
     */
 
     /**
-     #swagger.parameters['body'] = {
-        in: 'body',
-        '@schema': {
+     #swagger.requestBody = {
+        schema: {
         "required": ["name", "price", "description", "category_id", "stock", "discount"],
         "properties": {
             "name": { 
@@ -118,6 +117,12 @@ const createProduct = async (req, res) => {
         }
     }
     */
+
+    /* #swagger.security = [{
+       "oAuthSecurity": [
+           "write"
+       ]
+   }] */
 
     const { name, description, price, stock, category_id, created_at } = req.body;
     // validate category_id: 
@@ -162,9 +167,8 @@ const updateProduct = async (req, res) => {
     */
 
    /**
-     #swagger.parameters['body'] = {
-        in: 'body',
-        '@schema': {
+     #swagger.requestBody = {
+        schema: {
         "properties": {
             "name": { 
             "type": "string",
@@ -199,6 +203,12 @@ const updateProduct = async (req, res) => {
         }
     }
     */
+
+    /* #swagger.security = [{
+       "oAuthSecurity": [
+           "write"
+       ]
+   }] */
 
     // id validation
     let productId = req.params.id;
@@ -253,6 +263,7 @@ const deleteProduct = async (req, res) => {
     /**
      * #swagger.description= "Deletes the product info given the id."
     */
+
     /**
         * #swagger.parameters['id'] = {
            in: 'path',
@@ -263,6 +274,11 @@ const deleteProduct = async (req, res) => {
          }
         */
 
+    /* #swagger.security = [{
+       "oAuthSecurity": [
+           "write"
+       ]
+   }] */
 
     // id validation
     let productId = req.params.id;
